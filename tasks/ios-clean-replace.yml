@@ -1,0 +1,7 @@
+- name: Clean Manually
+  debug:
+    msg: "PLEASE CLEAN THIS DEVICE MANUALLY"
+
+- name: Set Method
+  set_fact:
+    method: replace

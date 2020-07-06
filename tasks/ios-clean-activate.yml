@@ -1,0 +1,28 @@
+---
+- name: Commit
+  ios_command:
+    commands:
+      - command: "install commit"
+  register: commit
+
+- name: Validate Commit
+  debug:
+      msg: "{{ commit.stdout_lines }}"
+  failed_when: commit.stdout[0] is search("FAILED")
+
+- name: Clean File System
+  ios_command:
+    commands:
+      - command: "install remove inactive"
+        prompt: Do you want to remove the above files.*
+        answer: y
+  register: clean_output
+
+- name: Validate Clean
+  debug:
+    msg: "{{ clean_output.stdout_lines }}"
+  failed_when: clean_output.stdout[0] is search("FAILED")
+  
+- name: Set Method
+  set_fact:
+    method: activate

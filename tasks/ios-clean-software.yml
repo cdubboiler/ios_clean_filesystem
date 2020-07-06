@@ -1,0 +1,16 @@
+---
+- name: SOFTWARE METHOD - CLEAN ALL SWITCHES
+  cli_command:
+    command: "software clean file flash:"
+    prompt: "Do .*:"
+    answer: "yes"
+  register: clean_output
+
+- name: SOFTWARE METHOD - VALIDATE CLEAN
+  debug:
+    msg: "{{ clean_output.stdout_lines }}"
+  failed_when: clean_output.stdout is search("FAILED")
+
+- name: Set Method
+  set_fact:
+    method: software

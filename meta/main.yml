@@ -1,0 +1,10 @@
+---
+
+galaxy_info:
+  author: Colin Wagner
+  description: Ansible Role to clean the network file system
+  company: Company
+  role_name: ios_clean_filesystem
+
+dependencies:
+  - ansible-network.network-engine

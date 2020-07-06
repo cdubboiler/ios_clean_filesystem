@@ -1,0 +1,17 @@
+---
+- name: Clean All Switches
+  ios_command:
+    commands:
+      - command: "request platform software package clean switch all"
+        prompt: proceed
+        answer: y
+  register: clean_output
+
+- name: Validate Clean
+  debug:
+    msg: "{{ clean_output.stdout_lines }}"
+  failed_when: clean_output.stdout is search("FAILED")
+
+- name: Set Method
+  set_fact:
+    method: request

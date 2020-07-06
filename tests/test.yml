@@ -1,0 +1,7 @@
+---
+- name: Clean ios device
+  hosts: all
+  gather_facts: no
+  connection: network_cli
+  roles:
+    - ios_clean_filesystem

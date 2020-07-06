@@ -1,0 +1,17 @@
+---
+- name: Clean File System
+  block:
+    - include_tasks: "{{ ansible_network_os }}-clean-activate.yml"
+  rescue:
+    - block:
+        - include_tasks: "{{ ansible_network_os }}-clean-request.yml"
+      rescue:
+        - block:
+            - include_tasks: "{{ ansible_network_os }}-clean-software.yml"
+          rescue:
+            - block:
+                - include_tasks: "{{ ansible_network_os }}-clean-replace.yml"
+
+- name: Print Method
+  debug:
+    msg: "The determined method is {{ method }}"
